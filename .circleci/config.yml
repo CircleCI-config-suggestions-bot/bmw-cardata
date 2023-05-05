@@ -67,6 +67,9 @@ jobs:
       - image: cimg/python:3.8
     steps:
       - install
+      - run: mkdir -p test-results
       - run:
           name: Run pylint
-          command: pytest
+          command: pytest --junitxml=test-results/junit.xml --junit_family=legacy
+      - store_test_results:
+          path: test-results
